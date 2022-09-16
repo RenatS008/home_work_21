@@ -1,7 +1,7 @@
 from exceptions import InvalidRequests
 
 
-class Request:
+class Request: # Класс Request в котором храниться запрос
     def __init__(self, request: str):
         split_request = request.lower().split(' ')
         if len(split_request) != 7:

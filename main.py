@@ -23,51 +23,33 @@ storages = {
 
 
 def main():
+    while True:  # Вывод информации о товаре и его местонахождение
 
-    while True:
-        """
-        Вывод информации о товаре и его местонахождение
-        """
         for storage_name in storages:
             print(f"Место нахождение товара:\n{storage_name}\n"
                   f"Наименование/количество товара: \n{storages[storage_name].get_items()}")
 
-        """
-        Ввод запроса
-        """
         user_input = input(
             'Введите запрос: \n'
             '(Пример: Доставить 3 печеньки из склада в магазин)\n'
             'Введите "закончить", для завершения запросов\n'
         )
 
-        """
-        Проверка остановки запросов 
-        """
         if user_input.lower() in "закончить":
             break
 
-        """
-        Проверка на корректность запроса
-        """
-        try:
+        try:  # Проверка на корректность запроса
             request = Request(request=user_input)
         except InvalidRequests as e:
             print(e.message)
             continue
 
-        """
-        Формирование запроса
-        """
-        courier = Courier(
+        courier = Courier(  # Формирование запроса
             request=request,
             storages=storages,
         )
 
-        """
-        Проверка запроса на ошибки
-        """
-        try:
+        try:  # Проверка запроса на ошибки
             courier.move()
         except BaseError as e:
             print(e.message)

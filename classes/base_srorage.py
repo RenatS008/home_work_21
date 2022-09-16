@@ -10,6 +10,9 @@ class BaseStorage(AbstractStorage):
         self.__capacity = capacity
 
     def add(self, name: str, amount: int) -> None:
+        """
+        Увеличивает запас items
+        """
         if self.get_free_space() < amount:
             raise NotEnoughSpace
 
@@ -19,6 +22,9 @@ class BaseStorage(AbstractStorage):
             self.__items[name] = amount
 
     def remove(self, name: str, amount: int) -> None:
+        """
+        Уменьшает запас items
+        """
         if name not in self.__items or self.__items[name] < amount:
             raise NotEnoughProduct
 
@@ -27,13 +33,22 @@ class BaseStorage(AbstractStorage):
             self.__items.pop(name)
 
     def get_free_space(self):
+        """
+        Проверить количество свободных мест
+        """
         free_space = 0
         for value in self.__items.values():
             free_space += value
         return self.__capacity - free_space
 
     def get_items(self) -> Dict[str, int]:
+        """
+        Возвращает сожержание склада в словаре {товар: количество}
+        """
         return self.__items
 
     def get_unique_items_count(self):
+        """
+        Возвращает количество уникальных товаров.
+        """
         return len(self.__items)
