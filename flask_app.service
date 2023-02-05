@@ -1,0 +1,11 @@
+[Unit]
+Description=Flask app service
+After=network.target
+
+[Service]
+WorkingDirectory=/home/renfoox/app
+ExecStart=/home/renfoox/app/venv/bin/python run.py
+
+[Install]
+WantedBy=multi-user.target
+
